@@ -1,10 +1,18 @@
 import './colors.dart';
+import 'package:zenzephyr/home.dart';
+import 'package:zenzephyr/route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+    routes: routes,
+  ));
 }
+
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,6 +24,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Zenzephyr",
+      routes: routes,
       home: Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
@@ -59,7 +68,7 @@ class MyApp extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 30.0,bottom: 20.0),
+                    padding: EdgeInsets.only(top: 30.0, bottom: 20.0),
                     child: Image.asset(
                       "assets/ohm.png",
                       width: 280,
@@ -70,7 +79,7 @@ class MyApp extends StatelessWidget {
                     width: 250,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Add the functionality you want when the button is pressed
+                        Navigator.of(context).pushNamed(Home.routeName);
                       },
                       style: ElevatedButton.styleFrom(
                         primary: AppColors.primaryColor,
@@ -78,7 +87,7 @@ class MyApp extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                         ),
                       ),
-                      child: Text("Exxplore Now"),
+                      child: Text("Explore Now"),
                     ),
                   ),
                 ],
