@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:zenzephyr/colors.dart';
+import 'package:zenzephyr/Utils/colors.dart';
+import 'package:zenzephyr/Pages/contactUs.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatelessWidget {
@@ -37,7 +38,7 @@ class Home extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: GridView.count(
               mainAxisSpacing: 10,
-              crossAxisSpacing: 5,
+              crossAxisSpacing: 1,
               crossAxisCount: 2,
               children: [
                 Card(
@@ -112,40 +113,50 @@ class Home extends StatelessWidget {
                     ],
                   ),
                 ),
-                Card(
-                  elevation: 4,
-                  shadowColor: const Color(0xFF00BF63),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.transparent),
+                        elevation: MaterialStateProperty.all(0), // Set elevation to 0
                   ),
-                  child: ListView(
-                    padding: const EdgeInsets.all(8),
-                    children: [
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        height: 65,
-                        child: Image.asset('assets/Contact us.png'),
-                      ),
-                      Container(
-                        height: 30,
-                        child: const Center(child: Text('Contact Us')),
-                      ),
-                      Container(
-                        height: 40,
-                        child: const Center(
-                          child: Text(
-                            'Connect for our Assistance',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 12,
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(Contact.routeName);
+                  },
+                  child: Card(
+                    elevation: 4,
+                    shadowColor: const Color(0xFF00BF63),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: ListView(
+                      padding: const EdgeInsets.all(8),
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          height: 65,
+                          child: Image.asset('assets/Contact us.png'),
+                        ),
+                        Container(
+                          height: 30,
+                          child: const Center(child: Text('Contact Us')),
+                        ),
+                        Container(
+                          height: 40,
+                          child: const Center(
+                            child: Text(
+                              'Connect for our Assistance',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: AppColors.textColor,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 Card(

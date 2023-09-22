@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "457531982389",
+    "project_id": "zenzephyr-ab6b5",
+    "storage_bucket": "zenzephyr-ab6b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457531982389:android:5a1ed2cb36e168ddf8277c",
+        "android_client_info": {
+          "package_name": "com.example.zenzephyr"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBprSmVINws62YsL9PcLSBCTuKWHg9aSyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

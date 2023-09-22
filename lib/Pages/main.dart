@@ -1,7 +1,7 @@
-import './colors.dart';
-import 'package:zenzephyr/home.dart';
-import 'package:zenzephyr/route.dart';
+import '../Utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:zenzephyr/Pages/home.dart';
+import 'package:zenzephyr/Utils/route.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
