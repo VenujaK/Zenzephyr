@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zenzephyr/Utils/colors.dart';
 import 'package:zenzephyr/Pages/contactUs.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:zenzephyr/Pages/chat_screen.dart';
 
 class Home extends StatelessWidget {
   static const routeName = "/home";
@@ -113,49 +114,52 @@ class Home extends StatelessWidget {
                     ],
                   ),
                 ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.transparent),
-                        elevation: MaterialStateProperty.all(0), // Set elevation to 0
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(Contact.routeName);
-                  },
-                  child: Card(
-                    elevation: 4,
-                    shadowColor: const Color(0xFF00BF63),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                          elevation: MaterialStateProperty.all(0), // Set elevation to 0
                     ),
-                    child: ListView(
-                      padding: const EdgeInsets.all(8),
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 65,
-                          child: Image.asset('assets/Contact us.png'),
-                        ),
-                        Container(
-                          height: 30,
-                          child: const Center(child: Text('Contact Us')),
-                        ),
-                        Container(
-                          height: 40,
-                          child: const Center(
-                            child: Text(
-                              'Connect for our Assistance',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: AppColors.textColor,
-                                fontSize: 12,
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(Contact.routeName);
+                    },
+                    child: Card(
+                      elevation: 4,
+                      shadowColor: const Color(0xFF00BF63),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: ListView(
+                        padding: const EdgeInsets.all(8),
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 65,
+                            child: Image.asset('assets/Contact us.png'),
+                          ),
+                          Container(
+                            height: 30,
+                            child: const Center(child: Text('Contact Us')),
+                          ),
+                          Container(
+                            height: 40,
+                            child: const Center(
+                              child: Text(
+                                'Connect for our Assistance',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -195,7 +199,19 @@ class Home extends StatelessWidget {
                     ],
                   ),
                 ),
-                Card(
+                
+                Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                          elevation: MaterialStateProperty.all(0), // Set elevation to 0
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(ChatScreen.routeName);
+                    },
+                    child: Card(
                   elevation: 4,
                   shadowColor: const Color(0xFF00BF63),
                   shape: RoundedRectangleBorder(
@@ -229,6 +245,8 @@ class Home extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                ),
                   ),
                 ),
                 Card(

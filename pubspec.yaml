@@ -38,6 +38,8 @@ dependencies:
   firebase_core: ^1.20.0
   firebase_auth: ^3.5.0
   google_fonts: ^6.0.0
+  mb_contact_form: ^0.0.2
+  flutter_dotenv: ^5.1.0
 
 
 dev_dependencies:
@@ -50,6 +52,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  chat_gpt_sdk:
+    git:
+      url: https://github.com/iampawan/Flutter-ChatGPT.git
+  velocity_x: ^3.6.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
