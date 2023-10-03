@@ -1,14 +1,14 @@
-import 'package:zenzephyr/Utils/threedots.dart';
-import 'package:zenzephyr/Utils/chatmessage.dart';
 import 'package:flutter/material.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:zenzephyr/Utils/threedots.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
+import 'package:zenzephyr/Utils/chatmessage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
-
+  static const routeName = "/contact";
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
@@ -23,9 +23,12 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
+    
     chatGPT = OpenAI.instance.build(
-        token: dotenv.env["API_KEY"],
+        token:
+            dotenv.env["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"],
         baseOption: HttpSetup(receiveTimeout: 60000));
+        print(dotenv.env["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"]);
     super.initState();
   }
 
@@ -62,7 +65,6 @@ class _ChatScreenState extends State<ChatScreen> {
     } else {
       final request =
           CompleteText(prompt: message.text, model: kTranslateModelV3);
-
 
       final response = await chatGPT!.onCompleteText(request: request);
       Vx.log(response!.choices[0].text);
