@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:zenzephyr/Utils/colors.dart';
 import 'package:zenzephyr/Pages/contactUs.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:zenzephyr/Pages/chatoption.dart';
 import 'package:zenzephyr/Pages/chat_screen.dart';
 
 class Home extends StatelessWidget {
@@ -31,7 +32,7 @@ class Home extends StatelessWidget {
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                  'assets/transparentbg (2).png'), // Replace with your image path
+                  'assets/transparentbg (2).png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -42,40 +43,54 @@ class Home extends StatelessWidget {
               crossAxisSpacing: 1,
               crossAxisCount: 2,
               children: [
-                Card(
-                  elevation: 4,
-                  shadowColor: const Color(0xFF00BF63),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: ListView(
-                    padding: const EdgeInsets.all(8),
-                    children: [
-                      const SizedBox(
-                        height: 10,
+                Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all(Colors.transparent),
+                      elevation:
+                          MaterialStateProperty.all(0), // Set elevation to 0
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(ChatOptionPage.routeName);
+                    },
+                    child: Card(
+                      elevation: 4,
+                      shadowColor: const Color(0xFF00BF63),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      Container(
-                        height: 65,
-                        child: Image.asset('assets/Chat with me.png'),
-                      ),
-                      Container(
-                        height: 30,
-                        child: const Center(child: Text('Chat With Me')),
-                      ),
-                      Container(
-                        height: 40,
-                        child: const Center(
-                          child: Text(
-                            'Engage in Enlightened Conversations',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 12,
+                      child: ListView(
+                        padding: const EdgeInsets.all(8),
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 65,
+                            child: Image.asset('assets/Chat with me.png'),
+                          ),
+                          Container(
+                            height: 30,
+                            child: const Center(child: Text('Chat With Me')),
+                          ),
+                          Container(
+                            height: 40,
+                            child: const Center(
+                              child: Text(
+                                'Engage in Enlightened Conversations',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontSize: 12,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
                 Card(
@@ -120,7 +135,8 @@ class Home extends StatelessWidget {
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(Colors.transparent),
-                          elevation: MaterialStateProperty.all(0), // Set elevation to 0
+                      elevation:
+                          MaterialStateProperty.all(0), // Set elevation to 0
                     ),
                     onPressed: () {
                       Navigator.of(context).pushNamed(Contact.routeName);
@@ -199,54 +215,54 @@ class Home extends StatelessWidget {
                     ],
                   ),
                 ),
-                
                 Container(
                   width: double.infinity,
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.all(Colors.transparent),
-                          elevation: MaterialStateProperty.all(0), // Set elevation to 0
+                      elevation:
+                          MaterialStateProperty.all(0), // Set elevation to 0
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed(ChatScreen.routeName);
+                      Navigator.pushNamed(context, ChatScreen.routeName);
                     },
                     child: Card(
-                  elevation: 4,
-                  shadowColor: const Color(0xFF00BF63),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: ListView(
-                    padding: const EdgeInsets.all(8),
-                    children: [
-                      const SizedBox(
-                        height: 10,
+                      elevation: 4,
+                      shadowColor: const Color(0xFF00BF63),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      Container(
-                        height: 65,
-                        child: Image.asset('assets/SympathyBot1.png'),
-                      ),
-                      Container(
-                        height: 30,
-                        child: const Center(child: Text('SympathyBot')),
-                      ),
-                      Container(
-                        height: 40,
-                        child: const Center(
-                          child: Text(
-                            'Calm yourself',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 12,
+                      child: ListView(
+                        padding: const EdgeInsets.all(8),
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 65,
+                            child: Image.asset('assets/SympathyBot1.png'),
+                          ),
+                          Container(
+                            height: 30,
+                            child: const Center(child: Text('SympathyBot')),
+                          ),
+                          Container(
+                            height: 40,
+                            child: const Center(
+                              child: Text(
+                                'Calm yourself',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontSize: 12,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
                   ),
                 ),
                 Card(

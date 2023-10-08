@@ -5,10 +5,9 @@ import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:zenzephyr/Utils/chatmessage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
-  static const routeName = "/contact";
+  static const routeName = "/chat_screen";
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
@@ -23,12 +22,11 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    
     chatGPT = OpenAI.instance.build(
         token:
-            dotenv.env["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"],
+            "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",
         baseOption: HttpSetup(receiveTimeout: 60000));
-        print(dotenv.env["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"]);
+    //print(dotenv.env["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"]);
     super.initState();
   }
 
@@ -105,12 +103,12 @@ class _ChatScreenState extends State<ChatScreen> {
                 _sendMessage();
               },
             ),
-            TextButton(
-                onPressed: () {
-                  _isImageSearch = true;
-                  _sendMessage();
-                },
-                child: const Text("Generate Image"))
+            // TextButton(
+            //     onPressed: () {
+            //       _isImageSearch = true;
+            //       _sendMessage();
+            //     },
+            //     child: const Text("Generate Image"))
           ],
         ),
       ],
@@ -120,7 +118,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text("ChatGPT & Dall-E2 Demo")),
+        appBar: AppBar(title: const Text("SympathyBot")),
         body: SafeArea(
           child: Column(
             children: [
