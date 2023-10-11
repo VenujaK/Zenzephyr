@@ -8,3 +8,12 @@ class AppColors {
   static const Color textColorblack = Color(0xFF000000);
   static const Color borderColor = Color(0xFFDDDDDD);
 }
+class ColorFilters {
+  static final greyscale = ColorFilter.matrix(<double>[
+    /// greyscale filter
+    0.2126, 0.7152, 0.0722, 0, 0,
+    0.2126, 0.7152, 0.0722, 0, 0,
+    0.2126, 0.7152, 0.0722, 0, 0,
+    0, 0, 0, 1, 0
+  ]);
+}

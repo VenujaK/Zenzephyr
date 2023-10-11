@@ -2,44 +2,50 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class ChatOptionPage extends StatefulWidget {
+const kChatGPTApiKey = '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'; 
+const kChatGPTApiEndpoint = 'https://api.openai.com/v1/chat/completions';
+
+class ChatOption extends StatefulWidget {
   static const routeName = "/chatoption";
   @override
-  _ChatOptionPageState createState() => _ChatOptionPageState();
+  _ChatOptionState createState() => _ChatOptionState();
 }
 
-class _ChatOptionPageState extends State<ChatOptionPage> {
-  TextEditingController _userInputController = TextEditingController();
-  String _response = '';
+class _ChatOptionState extends State<ChatOption> {
+  TextEditingController _inputController = TextEditingController();
+  String _output = '';
 
-  void _getResponseFromChatGPT(String userInput) async {
-    final apiKey = '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';
-    final apiUrl = 'https://api.openai.com/v1/engines/davinci/completions';
-    
-    final response = await http.post(
-      
-      Uri.parse(apiUrl),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $apiKey',
-      },
-      body: jsonEncode({
-        'prompt': userInput,
-        'max_tokens': 50,
-      }),
-      
-    );
-print('API Response: ${response.body}');
+  void _sendMessageToChatGPT(String message) async {
+    try {
+      final response = await http.post(
+        Uri.parse(kChatGPTApiEndpoint),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $kChatGPTApiKey',
+        },
+        body: jsonEncode(<String, dynamic>{
+          'model': 'gpt-3.5-turbo',
+          'messages': [
+            {'role': 'system', 'content': 'You are a helpful assistant.'},
+            {'role': 'user', 'content': message},
+          ],
+        }),
+      );
 
-    if (response.statusCode == 200) {
-      Map<String, dynamic> data = jsonDecode(response.body);
-      setState(() {
-        _response = data['choices'][0]['text'];
-      });
-    } else {
-      setState(() {
-        _response = 'Error';
-      });
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        final content = jsonResponse['choices'][0]['message']['content'];
+        setState(() {
+          _output = content;
+        });
+      } else {
+        print('Error: HTTP ${response.statusCode}');
+        print('Response: ${response.body}');
+        throw Exception('Failed to send message to ChatGPT');
+      }
+    } catch (e) {
+      print('Error: $e');
+      throw Exception('Failed to send message to ChatGPT');
     }
   }
 
@@ -49,27 +55,34 @@ print('API Response: ${response.body}');
       appBar: AppBar(
         title: Text('Chat Option'),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _userInputController,
-              decoration: InputDecoration(
-                hintText: 'Type something...',
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: _inputController,
+                decoration: InputDecoration(labelText: 'Enter your message'),
               ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              String userInput = _userInputController.text;
-              _getResponseFromChatGPT(userInput);
-            },
-            child: Text('Submit'),
-          ),
-          SizedBox(height: 20),
-          Text('Response: $_response'),
-        ],
+            ElevatedButton(
+              onPressed: () {
+                String message = _inputController.text;
+                _sendMessageToChatGPT(message);
+              },
+              child: Text('Share Your Thoughts'),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'SympathyBot Response:',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(_output),
+            ),
+          ],
+        ),
       ),
     );
   }

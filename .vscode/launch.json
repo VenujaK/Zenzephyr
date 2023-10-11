@@ -8,21 +8,21 @@
             "name": "zenzephyr",
             "request": "launch",
             "type": "dart",
-            "program": "lib/Pages/main.dart" // Set this to your entry point
+            "program": "lib/main.dart" // Set this to your entry point
         },
         {
             "name": "zenzephyr (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile",
-            "program": "lib/Pages/main.dart" // Set this to your entry point
+            "program": "lib/main.dart" // Set this to your entry point
         },
         {
             "name": "zenzephyr (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release",
-            "program": "lib/Pages/main.dart" // Set this to your entry point
+            "program": "lib/main.dart" // Set this to your entry point
         }
     ]
 }
