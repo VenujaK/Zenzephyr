@@ -3,6 +3,7 @@ import 'package:zenzephyr/Pages/calmme.dart';
 import 'package:zenzephyr/Pages/survey.dart';
 import 'package:zenzephyr/Utils/colors.dart';
 import 'package:zenzephyr/widgets/appbar.dart';
+import 'package:zenzephyr/Pages/therapyst.dart';
 import 'package:zenzephyr/Pages/contactUs.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zenzephyr/Pages/chatoption.dart';
@@ -16,7 +17,7 @@ class Home extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar:CustomAppBar(title: 'Zenzephyr'),
+        appBar:CustomAppBar(title: 'Zenzephyr', showLogoutButton: false),
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -241,7 +242,7 @@ class Home extends StatelessWidget {
                           MaterialStateProperty.all(0), // Set elevation to 0
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, ContactUsForm.routeName);
+                      Navigator.pushNamed(context, therapyst.routeName);
                     },
                     child: Card(
                       elevation: 4,

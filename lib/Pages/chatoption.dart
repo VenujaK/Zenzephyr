@@ -54,7 +54,7 @@ class _ChatOptionState extends State<ChatOption> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Chat With Me'),
+      appBar: CustomAppBar(title: 'Chat With Me', showLogoutButton: false),
       body: SingleChildScrollView(
         child: Column(
           children: [

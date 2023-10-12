@@ -29,7 +29,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: CustomAppBar(title: 'Calm Me'),
+    appBar: CustomAppBar(title: 'Calm Me', showLogoutButton: false),
     body: ListView(
       padding: EdgeInsets.all(16),
       children: [
@@ -67,7 +67,8 @@ class _MainPageState extends State<MainPage> {
       children: [
         Image.asset(
           imagePath,
-          height: 240,
+          height: 140,
+          width: double.infinity,
           fit: BoxFit.cover,
         ),
         Column(
@@ -82,7 +83,9 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ],
+          
         ),
+        
       ],
     ),
   ),

@@ -3,8 +3,10 @@ import 'package:zenzephyr/Utils/colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool showLogoutButton;
+  final Function()? onLogoutPressed;
 
-  CustomAppBar({required this.title});
+  CustomAppBar({required this.title, required this.showLogoutButton, this.onLogoutPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       shadowColor: Colors.black12,
       bottomOpacity: 0.0,
       elevation: 0.0,
-      
+      actions: [
+        if (showLogoutButton)
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: onLogoutPressed,
+          ),
+      ],
     );
   }
 

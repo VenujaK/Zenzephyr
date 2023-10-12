@@ -63,7 +63,7 @@ class _SurveyPageState extends State<SurveyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Survey'),
+      appBar: CustomAppBar(title: 'Survey', showLogoutButton: false),
       body: ListView(
         children: <Widget>[
           for (int i = 0; i < 7; i++)

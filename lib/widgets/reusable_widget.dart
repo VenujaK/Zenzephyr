@@ -39,7 +39,8 @@ TextField reusableTextField(String text, IconData icon, bool isPasswordType,
   );
 }
 
-Container firebaseUIButton(BuildContext context, String title, Function onTap) {
+Container firebaseUIButton(
+    BuildContext context, String title, Function onTap) {
   return Container(
     width: MediaQuery.of(context).size.width,
     height: 50,
@@ -47,7 +48,12 @@ Container firebaseUIButton(BuildContext context, String title, Function onTap) {
     decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
     child: ElevatedButton(
       onPressed: () {
-        onTap();
+        try {
+          onTap();
+        } catch (e) {
+          print("Error executing onTap function: $e");
+          
+        }
       },
       child: Text(
         title,

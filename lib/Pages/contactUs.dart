@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Contact Us'),
+      appBar: CustomAppBar(title: 'Contact Us', showLogoutButton: false),
       body: Stack(
         children: [
           Positioned.fill(

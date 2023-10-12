@@ -125,7 +125,7 @@ class _VoiceNoteScreenState extends State<VoiceNoteScreen> {
     
     return Scaffold(
       appBar: 
-      CustomAppBar(title: 'Confidence: ${(_confidence * 100.0).toStringAsFixed(1)}%'),
+      CustomAppBar(title: 'Confidence: ${(_confidence * 100.0).toStringAsFixed(1)}%', showLogoutButton: false),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AvatarGlow(
         animate: _isListening,
