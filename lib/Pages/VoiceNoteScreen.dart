@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:zenzephyr/Utils/colors.dart';
 import 'package:avatar_glow/avatar_glow.dart';
+import 'package:zenzephyr/widgets/appbar.dart';
 import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
-const kChatGPTApiKey = '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';
+const kChatGPTApiKey = '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';
 const kChatGPTApiEndpoint = 'https://api.openai.com/v1/chat/completions';
 
 class VoiceNoteScreen extends StatefulWidget {
@@ -120,10 +122,10 @@ class _VoiceNoteScreenState extends State<VoiceNoteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Confidence: ${(_confidence * 100.0).toStringAsFixed(1)}%'),
-      ),
+      appBar: 
+      CustomAppBar(title: 'Confidence: ${(_confidence * 100.0).toStringAsFixed(1)}%'),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AvatarGlow(
         animate: _isListening,
@@ -135,6 +137,7 @@ class _VoiceNoteScreenState extends State<VoiceNoteScreen> {
         child: FloatingActionButton(
           onPressed: _listen,
           child: Icon(_isListening ? Icons.mic : Icons.mic_none),
+          backgroundColor: AppColors.primaryColor, 
         ),
       ),
       body: SingleChildScrollView(
@@ -156,6 +159,12 @@ class _VoiceNoteScreenState extends State<VoiceNoteScreen> {
               ElevatedButton(
                 onPressed: _onAskHelpPressed,
                 child: Text('Ask Help'),
+                style: ElevatedButton.styleFrom(
+                            primary: AppColors.primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
               ),
             ],
           ),

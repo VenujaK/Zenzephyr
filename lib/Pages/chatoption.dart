@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:zenzephyr/Utils/colors.dart';
+import 'package:zenzephyr/widgets/appbar.dart';
 
-const kChatGPTApiKey = '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'; 
+const kChatGPTApiKey = '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'; 
 const kChatGPTApiEndpoint = 'https://api.openai.com/v1/chat/completions';
 
 class ChatOption extends StatefulWidget {
@@ -41,20 +43,18 @@ class _ChatOptionState extends State<ChatOption> {
       } else {
         print('Error: HTTP ${response.statusCode}');
         print('Response: ${response.body}');
-        throw Exception('Failed to send message to ChatGPT');
+        throw Exception('Failed to send message ');
       }
     } catch (e) {
       print('Error: $e');
-      throw Exception('Failed to send message to ChatGPT');
+      throw Exception('Failed to send message ');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat Option'),
-      ),
+      appBar: CustomAppBar(title: 'Chat With Me'),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -71,6 +71,7 @@ class _ChatOptionState extends State<ChatOption> {
                 _sendMessageToChatGPT(message);
               },
               child: Text('Share Your Thoughts'),
+              style: ElevatedButton.styleFrom(primary: AppColors.primaryColor,),
             ),
             SizedBox(height: 20),
             Text(

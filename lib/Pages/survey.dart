@@ -1,68 +1,76 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:zenzephyr/Utils/colors.dart';
+import 'package:zenzephyr/widgets/appbar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-
 class SurveyPage extends StatefulWidget {
-   static const routeName = "/survey";
+  static const routeName = "/survey";
   @override
   _SurveyPageState createState() => _SurveyPageState();
 }
 
 class _SurveyPageState extends State<SurveyPage> {
-  List<int> responses = [0, 0, 0, 0, 0, 0, 0]; // Initialize with 0 as default response
+  List<int> responses = [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]; // Initialize with 0 as default response
 
   void submitSurvey() async {
-  String apiUrl = 'http://10.0.2.2:5000/predict'; // Replace with your Flask server URL
+    String apiUrl =
+        'http://10.0.2.2:5000/predict'; // Replace with your Flask server URL
 
-  try {
-    final response = await http.post(
-      Uri.parse(apiUrl),
-      body: {'responses': responses.join(',')},
-    );
+    try {
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        body: {'responses': responses.join(',')},
+      );
 
-    if (response.statusCode == 200) {
-      // Parse the JSON response
-      Map<String, dynamic> result = jsonDecode(response.body);
+      if (response.statusCode == 200) {
+        // Parse the JSON response
+        Map<String, dynamic> result = jsonDecode(response.body);
 
-      // Extract the prediction value
-      int prediction = result['prediction'];
+        // Extract the prediction value
+        int prediction = result['prediction'];
 
-      // Show toast message based on prediction
-      String message = prediction == 1
-          ? 'You have depression symptoms'
-          : 'You do not have depression symptoms';
+        // Show toast message based on prediction
+        String message = prediction == 1
+            ? 'You have depression symptoms'
+            : 'You do not have depression symptoms';
 
-      Fluttertoast.showToast(
-          msg: message,
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.BOTTOM,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.black,
-          textColor: Colors.white,
-          fontSize: 16.0);
-    } else {
-      throw Exception('Failed to connect to the server');
+        Fluttertoast.showToast(
+            msg: message,
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: Colors.black,
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else {
+        throw Exception('Failed to connect to the server');
+      }
+    } catch (error) {
+      print('Error: $error');
     }
-  } catch (error) {
-    print('Error: $error');
   }
-}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Survey'),
-      ),
+      appBar: CustomAppBar(title: 'Survey'),
       body: ListView(
         children: <Widget>[
           for (int i = 0; i < 7; i++)
             ListTile(
               title: Text(
                 'Question ${i + 1}',
-                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color: AppColors.primaryColor),
               ),
               subtitle: Text(
                 getQuestion(i),
@@ -75,11 +83,18 @@ class _SurveyPageState extends State<SurveyPage> {
                     responses[i] = value ? 1 : 0;
                   });
                 },
+                activeColor: AppColors.primaryColor,
               ),
             ),
           ElevatedButton(
             onPressed: submitSurvey,
             child: Text('Submit'),
+            style: ElevatedButton.styleFrom(
+              primary: AppColors.primaryColor,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
           ),
         ],
       ),

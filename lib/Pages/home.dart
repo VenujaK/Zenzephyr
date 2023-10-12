@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:zenzephyr/Pages/calmme.dart';
 import 'package:zenzephyr/Pages/survey.dart';
 import 'package:zenzephyr/Utils/colors.dart';
+import 'package:zenzephyr/widgets/appbar.dart';
 import 'package:zenzephyr/Pages/contactUs.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zenzephyr/Pages/chatoption.dart';
-import 'package:zenzephyr/Pages/chat_screen.dart';
 import 'package:zenzephyr/Pages/VoiceNoteScreen.dart';
 
 class Home extends StatelessWidget {
@@ -16,21 +16,7 @@ class Home extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Zenzephyr',
-              style: TextStyle(color: AppColors.primaryColor)),
-          iconTheme: IconThemeData(color: AppColors.primaryColor),
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.black12,
-          bottomOpacity: 0.0,
-          elevation: 0.0,
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.menu),
-            ),
-          ],
-        ),
+        appBar:CustomAppBar(title: 'Zenzephyr'),
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -255,7 +241,7 @@ class Home extends StatelessWidget {
                           MaterialStateProperty.all(0), // Set elevation to 0
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, ChatScreen.routeName);
+                      Navigator.pushNamed(context, ContactUsForm.routeName);
                     },
                     child: Card(
                       elevation: 4,

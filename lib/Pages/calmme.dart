@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:zenzephyr/widgets/appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CalmMe extends StatelessWidget {
@@ -7,11 +8,11 @@ class CalmMe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: title,
-        theme: ThemeData(primarySwatch: Colors.deepOrange),
-        home: MainPage(title: title),
-      );
+    debugShowCheckedModeBanner: false,
+    title: title,
+    theme: ThemeData(primarySwatch: Colors.deepOrange),
+    home: MainPage(title: title),
+  );
 }
 
 class MainPage extends StatefulWidget {
@@ -28,63 +29,63 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
+    appBar: CustomAppBar(title: 'Calm Me'),
+    body: ListView(
+      padding: EdgeInsets.all(16),
+      children: [
+        buildImageCard(
+          imagePath: 'assets/countingsheep.png',
+          redirectUrl: 'https://countingsheep.online/',
         ),
-        body: ListView(
-          padding: EdgeInsets.all(16),
+        buildImageCard(
+          imagePath: 'assets/fishtank.png',
+          redirectUrl: 'https://www.youtube.com/watch?v=dM4GXQ0dB1M',
+        ),
+        buildImageCard(
+          imagePath: 'assets/bubble shooter.png',
+          redirectUrl: 'https://www.bubble-shooter-free.com/',
+        ),
+      ],
+    ),
+  );
+
+  Widget buildImageCard({required String imagePath, required String redirectUrl}) => Card(
+  clipBehavior: Clip.antiAlias,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(24),
+  ),
+  child: GestureDetector(
+    onTap: () async {
+      if (await canLaunch(redirectUrl)) {
+        await launch(redirectUrl);
+      } else {
+        throw 'Could not launch $redirectUrl';
+      }
+    },
+    child: Stack(
+      alignment: Alignment.center,
+      children: [
+        Image.asset(
+          imagePath,
+          height: 240,
+          fit: BoxFit.cover,
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            buildImageCard(
-              imageUrl:
-                  'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80',
-              redirectUrl: 'https://countingsheep.online/',
-            ),
-            buildImageCard(
-              imageUrl:
-                  'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80',
-              redirectUrl: 'https://countingsheep.online/',
-            ),
-            buildImageCard(
-              imageUrl:
-                  'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80',
-              redirectUrl: 'https://countingsheep.online/',
+            Text(
+              'Click Here to Play',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                fontSize: 24,
+              ),
             ),
           ],
         ),
-      );
+      ],
+    ),
+  ),
+);
 
-  Widget buildImageCard({required String imageUrl, required String redirectUrl}) => Card(
-        clipBehavior: Clip.antiAlias,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: GestureDetector(
-          onTap: () async {
-            if (await canLaunch(redirectUrl)) {
-              await launch(redirectUrl);
-            } else {
-              throw 'Could not launch $redirectUrl';
-            }
-          },
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Ink.image(
-                image: NetworkImage(imageUrl),
-                child: Container(),
-                height: 240,
-                fit: BoxFit.cover,
-              ),
-              Text(
-                'Card With Splash',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ],
-          ),
-        ),
-      );
 }
