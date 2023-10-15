@@ -19,10 +19,83 @@ class _SignInScreenState extends State<SignInScreen> {
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
 
+  void _signIn() {
+    String email = _emailTextController.text.trim();
+    String password = _passwordTextController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error"),
+            content: Text("Please enter both email and password."),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+      return; // Exit the method early if credentials are empty
+    }
+
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        )
+        .then((value) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => therapyst()),
+          );
+        })
+        .catchError((error) {
+          String errorMessage = "An error occurred while signing in. Please try again later.";
+
+          if (error is FirebaseAuthException) {
+            switch (error.code) {
+              case 'user-not-found':
+                errorMessage = "User not found. Please check your credentials.";
+                break;
+              case 'wrong-password':
+                errorMessage = "Invalid password. Please try again.";
+                break;
+              default:
+                errorMessage = error.message ?? errorMessage;
+                break;
+            }
+          }
+
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Error"),
+                content: Text("An error occurred while signing in. Please try again"),
+                actions: <Widget>[
+                  TextButton(
+                    child: Text("OK"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Register', showLogoutButton: false),
+      appBar: CustomAppBar(title: 'Login', showLogoutButton: false),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -40,11 +113,10 @@ class _SignInScreenState extends State<SignInScreen> {
                     20, MediaQuery.of(context).size.height * 0.1, 20, 0),
                 child: Column(
                   children: <Widget>[
-                   
                     Image.asset(
                       'assets/zenzepyr_logo.png', 
-                      width: 100, // Adjust the width as needed
-                      height: 100, // Adjust the height as needed
+                      width: 100, 
+                      height: 100, 
                     ),
                     const SizedBox(
                       height: 20,
@@ -62,20 +134,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       height: 5,
                     ),
                     forgetPassword(context),
-                    firebaseUIButton(context, "Sign In", () {
-                      FirebaseAuth.instance
-                          .signInWithEmailAndPassword(
-                              email: _emailTextController.text,
-                              password: _passwordTextController.text)
-                          .then((value) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => therapyst()));
-                      }).onError((error, stackTrace) {
-                        print("Error ${error.toString()}");
-                      });
-                    }),
+                    firebaseUIButton(context, "Sign In", _signIn),
                     signUpOption()
                   ],
                 ),

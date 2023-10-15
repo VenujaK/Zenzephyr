@@ -38,16 +38,45 @@ class _HomeScreenState extends State<therapyst> {
         child: ListView(
           children: [
             CustomCard(
-              imagePath: 'assets/zenzepyr_logo.png',
-              title: 'Title 1',
-              subtitle: 'Subtitle 1',
+              imagePath: 'assets/doctor.png',
+              title: 'Dr. NIPUNA RANAWEERA',
+              subtitle: 'Psychiatrist',
             ),
             CustomCard(
-              imagePath: 'assets/zenzepyr_logo.png',
-              title: 'Title 2',
-              subtitle: 'Subtitle 2',
+              imagePath: 'assets/doctor (1).png',
+              title: 'Prof. PABASARI GINIGE',
+              subtitle: 'Psychiatrist',
             ),
-            // Add more CustomCard widgets with different content
+            CustomCard(
+              imagePath: 'assets/doctor (2).png',
+              title: 'Dr (Mrs.) SAYURI PERERA',
+              subtitle: 'Psychiatrist',
+            ),
+            CustomCard(
+              imagePath: 'assets/doctor (3).png',
+              title: 'Dr. IYANTHIKA MEDAGAMA',
+              subtitle: 'Psychiatrist',
+            ),
+            CustomCard(
+              imagePath: 'assets/doctor.png',
+              title: 'Dr. NIPUNA RANAWEERA',
+              subtitle: 'Psychiatrist',
+            ),
+            CustomCard(
+              imagePath: 'assets/doctor (1).png',
+              title: 'Prof. PABASARI GINIGE',
+              subtitle: 'Psychiatrist',
+            ),
+            CustomCard(
+              imagePath: 'assets/doctor (2).png',
+              title: 'Dr (Mrs.) SAYURI PERERA',
+              subtitle: 'Psychiatrist',
+            ),
+            CustomCard(
+              imagePath: 'assets/doctor (3).png',
+              title: 'Dr. IYANTHIKA MEDAGAMA',
+              subtitle: 'Psychiatrist',
+            ),
           ],
         ),
       ),

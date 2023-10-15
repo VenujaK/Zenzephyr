@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:zenzephyr/Pages/home.dart';
+import 'package:zenzephyr/Utils/route.dart';
 import 'package:zenzephyr/Utils/colors.dart';
 import 'package:zenzephyr/widgets/appbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:zenzephyr/widgets/second_app_bar.dart';
 
 class ContactUsForm extends StatelessWidget {
   static const routeName = "/contact";
@@ -60,7 +63,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ),
                         child: Column(
-                          
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Image.asset(
@@ -174,6 +176,22 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
           ),
+          Container(
+            padding: EdgeInsets.all(16.0), // Adjust the padding as needed
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: FractionallySizedBox(
+                widthFactor: 1.0,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                      20.0), // Adjust the radius as needed
+                  child: BottomAppBar(
+                    child: SecondAppBar(),
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

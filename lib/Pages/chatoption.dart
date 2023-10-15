@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:zenzephyr/Utils/colors.dart';
 import 'package:zenzephyr/widgets/appbar.dart';
 
-const kChatGPTApiKey = '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'; 
+const kChatGPTApiKey = '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'; 
 const kChatGPTApiEndpoint = 'https://api.openai.com/v1/chat/completions';
 
 class ChatOption extends StatefulWidget {

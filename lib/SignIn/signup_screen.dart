@@ -18,26 +18,86 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _userNameTextController = TextEditingController();
 
-  void _signUp() async {
-    try {
-      // Create a new user with email and password
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailTextController.text,
-        password: _passwordTextController.text,
-      );
+ void _signUp() async {
+  String email = _emailTextController.text.trim();
+  String password = _passwordTextController.text.trim();
 
-      // Print a success message and navigate to the next screen
-      print("Created New Account");
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => therapyst()),
-      );
-    } catch (e) {
-      // Handle any errors that occur during the sign-up process
-      print("Error ${e.toString()}");
-      
-    }
+  if (email.isEmpty || password.isEmpty) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text("Please enter both email and password."),
+          actions: <Widget>[
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+    return; // Exit the method early if credentials are empty
   }
+
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    // If user creation is successful, navigate to the next screen
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => therapyst()),
+    );
+  } catch (e) {
+    // Handle any errors that occur during the sign-up process
+    String errorMessage = "An error occurred while signing up. Please try again later.";
+
+    if (e is FirebaseAuthException) {
+      switch (e.code) {
+        case 'invalid-email':
+          errorMessage = "The provided email address is badly formatted.";
+          break;
+        case 'email-already-in-use':
+          errorMessage = "The email address is already in use by another account.";
+          break;
+        case 'weak-password':
+          errorMessage = "The password provided is too weak.";
+          break;
+        default:
+          errorMessage = e.message ?? errorMessage;
+          break;
+      }
+    }
+
+    // Show error message to the user
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Error"),
+          content: Text(errorMessage),
+          actions: <Widget>[
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+
+
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,10 @@ import 'package:zenzephyr/Pages/therapyst.dart';
 import 'package:zenzephyr/Pages/contactUs.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:zenzephyr/Pages/chatoption.dart';
+import 'package:zenzephyr/widgets/home_cards.dart';
+import 'package:zenzephyr/SignIn/signin_screen.dart';
 import 'package:zenzephyr/Pages/VoiceNoteScreen.dart';
+import 'package:zenzephyr/widgets/second_app_bar.dart';
 
 class Home extends StatelessWidget {
   static const routeName = "/home";
@@ -17,324 +20,94 @@ class Home extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar:CustomAppBar(title: 'Zenzephyr', showLogoutButton: false),
-        body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/transparentbg (2).png'),
-              fit: BoxFit.cover,
+        appBar: CustomAppBar(title: 'Zenzephyr', showLogoutButton: false),
+        body: Stack(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/transparentbg (2).png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.count(
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 1,
+                  crossAxisCount: 2,
+                  children: [
+                    CustomCard(
+                      imagePath: 'assets/Chat with me.png',
+                      title: 'Chat With Me',
+                      description: 'Engage in Enlightened Conversations',
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(ChatOption.routeName);
+                      },
+                    ),
+                    CustomCard(
+                      imagePath: 'assets/Talk with me.png',
+                      title: 'Talk To Me',
+                      description: 'Expressions Unveiled',
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(VoiceNoteScreen.routeName);
+                      },
+                    ),
+                    CustomCard(
+                      imagePath: 'assets/Contact us.png',
+                      title: 'Contact Us',
+                      description: 'Connect for our Assistance',
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushNamed(ContactUsForm.routeName);
+                      },
+                    ),
+                    CustomCard(
+                      imagePath: 'assets/calm me2.png',
+                      title: 'Calm Me',
+                      description: 'Calm yourself',
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(CalmMe.routeName);
+                      },
+                    ),
+                    CustomCard(
+                      imagePath: 'assets/SympathyBot1.png',
+                      title: 'Therapyst',
+                      description: 'Calm yourself',
+                      onPressed: () {
+                        Navigator.pushNamed(context, SignInScreen.routeName);
+                      },
+                    ),
+                    CustomCard(
+                      imagePath: 'assets/Servey.png',
+                      title: 'Survey',
+                      description: 'In-depth Insights, Meticulous Analysis',
+                      onPressed: () {
+                        Navigator.of(context).pushNamed(SurveyPage.routeName);
+                      },
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GridView.count(
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 1,
-              crossAxisCount: 2,
-              children: [
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      elevation:
-                          MaterialStateProperty.all(0), // Set elevation to 0
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(ChatOption.routeName);
-                    },
-                    child: Card(
-                      elevation: 4,
-                      shadowColor: const Color(0xFF00BF63),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: ListView(
-                        padding: const EdgeInsets.all(8),
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: 65,
-                            child: Image.asset('assets/Chat with me.png'),
-                          ),
-                          Container(
-                            height: 30,
-                            child: const Center(child: Text('Chat With Me')),
-                          ),
-                          Container(
-                            height: 40,
-                            child: const Center(
-                              child: Text(
-                                'Engage in Enlightened Conversations',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+             Container(
+            padding: EdgeInsets.only(top: 16.0, bottom: 8.0, left: 8.0, right: 8.0),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: FractionallySizedBox(
+                widthFactor: 1.0,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(
+                      20.0), // Adjust the radius as needed
+                  child: BottomAppBar(
+                    child: SecondAppBar(),
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      elevation:
-                          MaterialStateProperty.all(0), // Set elevation to 0
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(VoiceNoteScreen.routeName);
-                    },
-                    child: Card(
-                      elevation: 4,
-                      shadowColor: const Color(0xFF00BF63),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: ListView(
-                        padding: const EdgeInsets.all(8),
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: 65,
-                            child: Image.asset('assets/Talk with me.png'),
-                          ),
-                          Container(
-                            height: 30,
-                            child: const Center(child: Text('Talk To Me')),
-                          ),
-                          Container(
-                            height: 20,
-                            child: const Center(
-                              child: Text(
-                                'Expressions Unveiled',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      elevation:
-                          MaterialStateProperty.all(0), // Set elevation to 0
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(ContactUsForm.routeName);
-                    },
-                    child: Card(
-                      elevation: 4,
-                      shadowColor: const Color(0xFF00BF63),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: ListView(
-                        padding: const EdgeInsets.all(8),
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: 65,
-                            child: Image.asset('assets/Contact us.png'),
-                          ),
-                          Container(
-                            height: 30,
-                            child: const Center(child: Text('Contact Us')),
-                          ),
-                          Container(
-                            height: 40,
-                            child: const Center(
-                              child: Text(
-                                'Connect for our Assistance',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      elevation:
-                          MaterialStateProperty.all(0), // Set elevation to 0
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(CalmMe.routeName);
-                    },
-                    child: Card(
-                      elevation: 4,
-                      shadowColor: const Color(0xFF00BF63),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: ListView(
-                        padding: const EdgeInsets.all(8),
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: 65,
-                            child: Image.asset('assets/calm me2.png'),
-                          ),
-                          Container(
-                            height: 30,
-                            child: const Center(child: Text('Calm Me')),
-                          ),
-                          Container(
-                            height: 40,
-                            child: const Center(
-                              child: Text(
-                                'Calm yourself',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      elevation:
-                          MaterialStateProperty.all(0), // Set elevation to 0
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, therapyst.routeName);
-                    },
-                    child: Card(
-                      elevation: 4,
-                      shadowColor: const Color(0xFF00BF63),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: ListView(
-                        padding: const EdgeInsets.all(8),
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: 65,
-                            child: Image.asset('assets/SympathyBot1.png'),
-                          ),
-                          Container(
-                            height: 30,
-                            child: const Center(child: Text('Therapyst')),
-                          ),
-                          Container(
-                            height: 40,
-                            child: const Center(
-                              child: Text(
-                                'Calm yourself',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      elevation:
-                          MaterialStateProperty.all(0), // Set elevation to 0
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(SurveyPage.routeName);
-                    },
-                    child: Card(
-                      elevation: 4,
-                      shadowColor: const Color(0xFF00BF63),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: ListView(
-                        padding: const EdgeInsets.all(8),
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: 65,
-                            child: Image.asset('assets/Servey.png'),
-                          ),
-                          Container(
-                            height: 30,
-                            child: const Center(child: Text('Servey')),
-                          ),
-                          Container(
-                            height: 40,
-                            child: const Center(
-                              child: Text(
-                                'In-depth Insights, Meticulous Analysis',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: AppColors.textColor,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-          ),
+          )
+          ],
         ),
       ),
     );

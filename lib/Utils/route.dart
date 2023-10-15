@@ -11,15 +11,6 @@ import 'package:zenzephyr/SignIn/signin_screen.dart';
 import 'package:zenzephyr/SignIn/reset_password.dart';
 import 'package:zenzephyr/Pages/VoiceNoteScreen.dart';
 
-
-
-
-
-
-
-
-
-
 final Map<String, WidgetBuilder> routes = {
   Home.routeName: (_) => Home(),
   ContactUsForm.routeName:(_) => ContactUsForm(), 
@@ -31,5 +22,6 @@ final Map<String, WidgetBuilder> routes = {
   therapyst.routeName:(_) => therapyst(), 
   SignUpScreen.routeName:(_) => SignUpScreen(), 
   ResetPassword.routeName:(_) => ResetPassword(), 
+
   
 };
