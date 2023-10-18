@@ -7,7 +7,7 @@ import 'package:zenzephyr/widgets/appbar.dart';
 import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
-const kChatGPTApiKey = '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';
+const kChatGPTApiKey = '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';
 const kChatGPTApiEndpoint = 'https://api.openai.com/v1/chat/completions';
 
 class VoiceNoteScreen extends StatefulWidget {

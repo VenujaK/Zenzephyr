@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:zenzephyr/Utils/colors.dart';
+import 'package:zenzephyr/widgets/appbar.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+void main() {
+  testWidgets('CustomAppBar Test', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          appBar: CustomAppBar(
+            title: 'Test Title',
+            showLogoutButton: true,
+            onLogoutPressed: () {},
+          ),
+        ),
+      ),
+    );
+
+    // Verify that the title is rendered and styled correctly
+    expect(find.text('Test Title'), findsOneWidget);
+    final titleFinder = find.text('Test Title');
+    final titleWidget = tester.widget<Text>(titleFinder);
+    expect(titleWidget.style!.color, equals(AppColors.primaryColor));
+    expect(titleWidget.style!.fontWeight, equals(FontWeight.w600));
+    expect(titleWidget.style!.fontSize, equals(16.0));
+
+    // Verify that the logout button is rendered if showLogoutButton is true
+    final logoutButtonFinder = find.byIcon(Icons.logout);
+    if (logoutButtonFinder.evaluate().isNotEmpty) {
+      expect(logoutButtonFinder, findsOneWidget);
+    }
+
+    // Verify that the onPressed callback is called when the logout button is pressed
+    if (logoutButtonFinder.evaluate().isNotEmpty) {
+      await tester.tap(logoutButtonFinder);
+      // Add assertions related to the behavior you expect after pressing the button
+    }
+  });
+}

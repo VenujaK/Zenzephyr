@@ -35,7 +35,7 @@ void reloadPage(BuildContext context) {
 
 
   void submitSurvey() async {
-    String apiUrl = 'http://10.0.2.2:5000/predict';
+    String apiUrl = 'http://192.168.1.9:5000/predict';
 
     try {
       final response = await http.post(
@@ -77,7 +77,7 @@ void reloadPage(BuildContext context) {
       body:  Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/transparentbg (2).png"), // Replace with your image path
+            image: AssetImage("assets/bg3.png"), // Replace with your image path
             fit: BoxFit.cover,
           ),
         ),

@@ -39,7 +39,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Therapyst', showLogoutButton: false),
+      appBar: CustomAppBar(title: 'Calm Me', showLogoutButton: false),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -62,7 +62,7 @@ class _MainPageState extends State<MainPage> {
               ),
               GestureDetector(
                 onTap: () {
-                  _launchURL('https://www.youtube.com/watch?v=dM4GXQ0dB1M');
+                  _launchURL('https://www.youtube.com/watch?v=4ET97XLXMK8&ab_channel=SweetDream');
                 },
                 child: CustomCard(
                   imagePath: 'assets/fishtank.png',
